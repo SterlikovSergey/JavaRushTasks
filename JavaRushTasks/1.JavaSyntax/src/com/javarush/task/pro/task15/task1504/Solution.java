@@ -16,19 +16,21 @@ public class Solution {
         Scanner scanner = new Scanner(System.in);
 
         try (InputStream inputStream = Files.newInputStream(Paths.get(scanner.nextLine()));
-             OutputStream outputStream = Files.newOutputStream(Paths.get(scanner.nextLine()))) {
-            byte[] buffer = new byte[65536];
+             OutputStream outputStream = Files.newOutputStream(Paths.get(scanner.nextLine()))
+        ) {
+            int size = 2;
+            byte[] buffer = new byte[size];
             while (inputStream.available() > 0) {
-                int date = inputStream.read(buffer);
-                for (int i = 0; i < buffer.length - 1; i++) {
-                    byte time = buffer[i + 1];
-                    buffer[i + 1] = buffer[i];
-                    buffer[i] = time;
-                    i++;
+                int real = inputStream.read(buffer);
+                if (real == 2) {
+                    outputStream.write(buffer, 1, 1);
+                    outputStream.write(buffer, 0, 1);
                 }
-                outputStream.write(buffer,0,date);
+                else {
+                    outputStream.write(buffer, 0, 1);
+                }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException();
         }
     }
