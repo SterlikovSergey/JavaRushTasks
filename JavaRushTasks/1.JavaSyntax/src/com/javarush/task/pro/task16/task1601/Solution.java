@@ -1,5 +1,6 @@
 package com.javarush.task.pro.task16.task1601;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -9,15 +10,24 @@ import java.util.Date;
 
 public class Solution {
 
-    static Date birthDate;
+    static Date birthDate = new Date(1980,10,28);;
 
     public static void main(String[] args) {
         System.out.println(getDayOfWeek(birthDate));
     }
 
     static String getDayOfWeek(Date date) {
-        //напишите тут ваш код
-
-        return null;
+        int day = date.getDay();
+        String result = "";
+        switch (day){
+            case 0: return "Воскресенье";
+            case 1: return "Понедельник";
+            case 2: return "Вторник";
+            case 3: return "Среда";
+            case 4: return "Четверг";
+            case 5: return "Пятница";
+            case 6: return "Суббота";
+        }
+        return result;
     }
 }
